@@ -1,3 +1,5 @@
+import ItemsTable from "./components/ItemsTable"
+
 function App() {
   return (
     <div className="min-h-screen bg-zinc-900 flex flex-col items-center justify-center p-4 font-sans selection:bg-green-500/30">
@@ -21,19 +23,8 @@ function App() {
 
         <div className="space-y-1">
           <h2 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider ml-1">Tu Lista</h2>
-          
-          <div className="group flex items-center justify-between bg-zinc-700/30 px-4 py-2 rounded-lg border border-transparent hover:border-zinc-600 hover:bg-zinc-700/50 transition-all">
-            <span className="text-zinc-200 font-medium">El Principito</span>
-            
-            <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-              <button className="p-2 text-zinc-400 hover:text-yellow-500 hover:bg-yellow-500/10 rounded-lg transition-colors">
-                <i className="fa-regular fa-pen-to-square"></i>
-              </button>
-              <button className="p-2 text-zinc-400 hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-colors">
-                <i className="fa-solid fa-trash"></i>
-              </button>
-            </div>
-          </div>
+
+          <ItemsTable title="El Principito" />
 
           {/* Estado vacío (opcional) */}
           {/* <p className="text-center text-zinc-500 py-4 italic">No hay libros en la lista</p> */}
