@@ -1,6 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\LibroController;
+// use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('categorias', [CategoriaController::class, 'index']);
+Route::post('categorias', [CategoriaController::class, 'store']);
+Route::put('categorias/{id}',[CategoriaController::class, 'update']);
+Route::delete('categorias/{id}', [CategoriaController::class, 'destroy']);
+
+Route::get('libros', [LibroController::class, 'index']);
+Route::post('libros', [LibroController::class, 'store']);
+Route::put('libros/{id}',[LibroController::class, 'update']);
+Route::delete('libros/{id}', [LibroController::class, 'destroy']);
+
+
+// Tambien podemos utilizar
+// Route::apiResource('categorias', CategoriaController::class);
+// Route::apiResource('libros', LibroController::class);
