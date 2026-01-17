@@ -18,6 +18,6 @@ class Categoria extends Model
 
     public function libros()
     {
-        return $this->hasMany(Libros::class, 'id_categoria');
+        return $this->hasMany(Libro::class, 'id_categoria');
     }
 }
