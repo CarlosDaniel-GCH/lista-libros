@@ -16,12 +16,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*
+|--------------------------------------------------------------------------
+| CATEGORÍAS
+|--------------------------------------------------------------------------
+*/
 Route::get('categorias', [CategoriaController::class, 'index']);
+Route::get('categorias/{id}', [CategoriaController::class, 'show']); 
 Route::post('categorias', [CategoriaController::class, 'store']);
 Route::put('categorias/{id}',[CategoriaController::class, 'update']);
 Route::delete('categorias/{id}', [CategoriaController::class, 'destroy']);
 
+/*
+|--------------------------------------------------------------------------
+| LIBROS
+|--------------------------------------------------------------------------
+*/
 Route::get('libros', [LibroController::class, 'index']);
+Route::get('libros/{id}', [LibroController::class, 'show']);
 Route::post('libros', [LibroController::class, 'store']);
 Route::put('libros/{id}',[LibroController::class, 'update']);
 Route::delete('libros/{id}', [LibroController::class, 'destroy']);
