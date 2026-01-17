@@ -1,0 +1,79 @@
+import { useState } from 'react'
+
+interface AddBookModalProps {
+    isOpen: boolean
+    onClose: () => void
+    onSave: (data: {
+        name: string
+        description: string
+        category: string
+    }) => void
+}
+
+function AddBookModal({ isOpen, onClose, onSave }: AddBookModalProps) {
+    const [name, setName] = useState('')
+    const [description, setDescription] = useState('')
+    const [category, setCategory] = useState('')
+
+    if (!isOpen) return null
+
+    const handleSave = () => {
+        onSave({ name, description, category })
+        setName('')
+        setDescription('')
+        setCategory('')
+    }
+
+    return (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div className="bg-zinc-800 rounded-lg p-6 w-[90%] max-w-md">
+            <h2 className="text-zinc-100 text-lg font-semibold mb-4">
+            Agregar libro
+            </h2>
+
+            <div className="flex flex-col gap-4">
+            <input
+                type="text"
+                placeholder="Nombre"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="px-3 py-2 rounded-lg bg-zinc-700 text-zinc-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+
+            <textarea
+                placeholder="Descripción"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                className="px-3 py-2 rounded-lg bg-zinc-700 text-zinc-200 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+
+            <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="px-3 py-2 rounded-lg bg-zinc-700 text-zinc-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+                <option value="">Seleccionar categoría</option>
+            </select>
+            </div>
+
+            <div className="flex justify-end gap-3 mt-6">
+            <button
+                onClick={onClose}
+                className="px-4 py-2 rounded-lg bg-zinc-600 text-zinc-200 hover:bg-zinc-500 transition-colors"
+            >
+                Cancelar
+            </button>
+
+            <button
+                onClick={handleSave}
+                className="px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-500 transition-colors"
+            >
+                Guardar
+            </button>
+            </div>
+        </div>
+        </div>
+  )
+}
+
+export default AddBookModal
