@@ -1,0 +1,46 @@
+function App() {
+  return (
+    <div className="min-h-screen bg-zinc-900 flex flex-col items-center justify-center p-4 font-sans selection:bg-green-500/30">
+      <div className="w-full max-w-md bg-zinc-800/50 p-8 rounded-2xl shadow-2xl border border-zinc-700 backdrop-blur-sm">
+        
+        <header className="mb-8 text-center">
+          <h1 className="text-3xl font-bold text-white tracking-tight">Mis Libros</h1>
+          <p className="text-zinc-400 text-sm mt-1">Gestiona tu colección personal</p>
+        </header>
+
+        <div className="flex gap-2 mb-8">
+          <input 
+            type="text"
+            placeholder="Título del libro..."
+            className="flex-1 bg-zinc-700/50 border border-zinc-600 rounded-xl px-4 py-2 text-white outline-none focus:ring-2 focus:ring-green-500/50 focus:border-green-500 transition-all placeholder:text-zinc-500"
+          />
+          <button className="bg-green-600 hover:bg-green-500 text-white font-medium px-5 py-2 rounded-xl transition-all active:scale-95 shadow-lg shadow-green-900/20">
+            Agregar
+          </button>
+        </div>
+
+        <div className="space-y-1">
+          <h2 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider ml-1">Tu Lista</h2>
+          
+          <div className="group flex items-center justify-between bg-zinc-700/30 px-4 py-2 rounded-lg border border-transparent hover:border-zinc-600 hover:bg-zinc-700/50 transition-all">
+            <span className="text-zinc-200 font-medium">El Principito</span>
+            
+            <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <button className="p-2 text-zinc-400 hover:text-yellow-500 hover:bg-yellow-500/10 rounded-lg transition-colors">
+                <i className="fa-regular fa-pen-to-square"></i>
+              </button>
+              <button className="p-2 text-zinc-400 hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-colors">
+                <i className="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </div>
+
+          {/* Estado vacío (opcional) */}
+          {/* <p className="text-center text-zinc-500 py-4 italic">No hay libros en la lista</p> */}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default App
