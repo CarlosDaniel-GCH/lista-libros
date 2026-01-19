@@ -8,6 +8,7 @@ function App() {
   const [isAddOpen, setIsAddOpen] = useState(false)
   const [books, setBooks] = useState<Book[]>([])
   const [loading, setLoading] = useState(true)
+  const [searchTerm, setSearchTerm] = useState("")
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -17,6 +18,10 @@ function App() {
     }
     fetchBooks()
   }, [])
+
+  const filteredBooks = books.filter((book) =>
+    book.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+  )
 
   return (
     <div className="min-h-screen bg-zinc-900 flex flex-col items-center justify-center p-4 font-sans selection:bg-green-500/30">
@@ -30,7 +35,9 @@ function App() {
         <div className="flex gap-2 mb-8">
           <input 
             type="text"
-            placeholder="Título del libro..."
+            placeholder="Buscar por título..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
             className="flex-1 bg-zinc-700/50 border border-zinc-600 rounded-xl px-4 py-2 text-white outline-none focus:ring-2 focus:ring-green-500/50 focus:border-green-500 transition-all placeholder:text-zinc-500"
           />
           <button
@@ -45,15 +52,17 @@ function App() {
           <h2 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider ml-1">Tu Lista</h2>
 
           {loading ? (
-            <p className="text-center text-zinc-500 py-4">Cargando...</p>
+            <p className="text-center text-zinc-500 py-4 italic">Cargando libros...</p>
           ) : (
-            books.map((book) => (
+            filteredBooks.map((book) => (
               <ItemsTable key={book.id} title={book.nombre} />
             ))
           )}
 
-          {!loading && books.length === 0 && (
-            <p className="text-center text-zinc-500 py-4 italic">No hay libros en la lista</p>
+          {!loading && filteredBooks.length === 0 && (
+            <p className="text-center text-zinc-500 py-4 italic text-zinc-600">
+              {searchTerm ? "No se encontraron coincidencias" : "No hay libros en la lista"}
+            </p>
           )}
         </div>
       </div>
