@@ -1,9 +1,22 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ItemsTable from "./components/ItemsTable"
 import AddBookModal from "./components/AddBookModal"
+import { getBooks } from "./services/getBooks"
+import type { Book } from "./services/getBooks"
 
 function App() {
   const [isAddOpen, setIsAddOpen] = useState(false)
+  const [books, setBooks] = useState<Book[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      const data = await getBooks()
+      setBooks(data)
+      setLoading(false)
+    }
+    fetchBooks()
+  }, [])
 
   return (
     <div className="min-h-screen bg-zinc-900 flex flex-col items-center justify-center p-4 font-sans selection:bg-green-500/30">
@@ -31,10 +44,17 @@ function App() {
         <div className="space-y-1">
           <h2 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider ml-1">Tu Lista</h2>
 
-          <ItemsTable title="El Principito" />
+          {loading ? (
+            <p className="text-center text-zinc-500 py-4">Cargando...</p>
+          ) : (
+            books.map((book) => (
+              <ItemsTable key={book.id} title={book.nombre} />
+            ))
+          )}
 
-          {/* Estado vacío (opcional) */}
-          {/* <p className="text-center text-zinc-500 py-4 italic">No hay libros en la lista</p> */}
+          {!loading && books.length === 0 && (
+            <p className="text-center text-zinc-500 py-4 italic">No hay libros en la lista</p>
+          )}
         </div>
       </div>
 
