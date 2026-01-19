@@ -3,8 +3,12 @@ import DeleteBookModal from './DeleteBookModal'
 import EditBookModal from './EditBookModal'
 import type { ItemsTableProps } from "../types/ItemsTableProps"
 
+interface ExtendedItemsTableProps extends ItemsTableProps {
+  id: number;
+  onDelete: (id: number) => void;
+}
 
-function ItemsTable({ title }: ItemsTableProps) {
+function ItemsTable({ title, id, onDelete }: ExtendedItemsTableProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [isEditOpen, setIsEditOpen] = useState(false)
 
@@ -34,7 +38,8 @@ function ItemsTable({ title }: ItemsTableProps) {
             isOpen={isOpen}
             onClose={() => setIsOpen(false)}
             onConfirm={() => {
-            setIsOpen(false)
+              onDelete(id)
+              setIsOpen(false)
             }}
         />
 
@@ -42,8 +47,8 @@ function ItemsTable({ title }: ItemsTableProps) {
             isOpen={isEditOpen}
             onClose={() => setIsEditOpen(false)}
             onSave={(data) => {
-            console.log(data)
-            setIsEditOpen(false)
+              console.log(data)
+              setIsEditOpen(false)
             }}
         />
     </>

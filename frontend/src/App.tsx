@@ -3,6 +3,7 @@ import ItemsTable from "./components/ItemsTable"
 import AddBookModal from "./components/AddBookModal"
 import { getBooks } from "./services/getBooks"
 import { postBook } from "./services/postBook"
+import { deleteBook } from "./services/deleteBook"
 import { getCategories } from "./services/getCategories"
 import type { Category } from "./types/Category"
 import type { Book } from "./types/Book"
@@ -42,6 +43,16 @@ function App() {
     }
   }
 
+  const handleDeleteBook = async (id: number) => {
+    try {
+      await deleteBook(id)
+      setBooks((prevBooks) => prevBooks.filter(book => book.id !== id))
+    } catch (error) {
+      console.error(error)
+      alert("No se pudo eliminar el libro")
+    }
+  }
+
   const filteredBooks = books.filter((book) =>
     book.nombre.toLowerCase().includes(searchTerm.toLowerCase())
   )
@@ -76,7 +87,12 @@ function App() {
             <p className="text-center text-zinc-500 py-4 italic">Cargando datos...</p>
           ) : (
             filteredBooks.map((book) => (
-              <ItemsTable key={book.id} title={book.nombre} />
+              <ItemsTable 
+                key={book.id} 
+                id={book.id} 
+                title={book.nombre} 
+                onDelete={handleDeleteBook}
+              />
             ))
           )}
           {!loading && filteredBooks.length === 0 && (
