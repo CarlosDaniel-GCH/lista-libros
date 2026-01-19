@@ -1,10 +1,8 @@
 import { useState } from 'react'
 import DeleteBookModal from './DeleteBookModal'
 import EditBookModal from './EditBookModal'
+import type { ItemsTableProps } from "../types/ItemsTableProps"
 
-interface ItemsTableProps {
-  title: string
-}
 
 function ItemsTable({ title }: ItemsTableProps) {
   const [isOpen, setIsOpen] = useState(false)

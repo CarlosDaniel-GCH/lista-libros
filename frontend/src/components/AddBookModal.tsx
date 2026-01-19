@@ -1,14 +1,5 @@
 import { useState } from 'react'
-
-interface AddBookModalProps {
-    isOpen: boolean
-    onClose: () => void
-    onSave: (data: {
-        name: string
-        description: string
-        category: string
-    }) => void
-}
+import type { AddBookModalProps } from "../types/AddBookModalProps"
 
 function AddBookModal({ isOpen, onClose, onSave }: AddBookModalProps) {
     const [name, setName] = useState('')

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import ItemsTable from "./components/ItemsTable"
 import AddBookModal from "./components/AddBookModal"
 import { getBooks } from "./services/getBooks"
-import type { Book } from "./services/getBooks"
+import type { Book } from "./types/Book"
 
 function App() {
   const [isAddOpen, setIsAddOpen] = useState(false)
